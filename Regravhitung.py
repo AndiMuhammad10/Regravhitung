@@ -14,7 +14,7 @@ page_bg = """
 }
 
 .stApp {
-    background: linear-gradient(-45deg, #d6b3ff, #ffffff, #cdb4db, #f8f8f8);
+    background: linear-gradient(-45deg, #d6b3ff, #ffffff, #4b0082, #f8f8f8);
     background-size: 400% 400%;
     animation: gradient 20s ease infinite;
 }
@@ -99,7 +99,7 @@ st.title("Kalkulator Gravimetri")
 st.write("Silahkan masukkan data mas bro 😎")
 
 with st.form(key='grav_form'):
-    st.subheader("Input data")
+    st.subheader("Masukkan data")
     W0 = st.number_input("W0 (g) — berat filter/timbang sebelum (tare)", min_value=0.0, format="%.6f", value=0.0000)
     W1 = st.number_input("W1 (g) — berat filter/timbang setelah endapan", min_value=0.0, format="%.6f", value=0.0000)
     volume_ml = st.number_input("Volume sampel (mL)", min_value=0.0, format="%.6f", value=1.0000)
@@ -145,7 +145,7 @@ if submitted:
                         mass_el = periodic_table[el] * cnt
                         st.write(f"{el}: {periodic_table[el]:.6f} × {cnt} = {mass_el:.6f} g/mol")
 
-                    st.markdown("**2) Hitung Bm**")
+                    st.markdown("**2) Hitung BM**")
                     st.write(f"Bm({compound}) = " + " + ".join([f"{periodic_table[el]:.6f}×{cnt}" for el, cnt in counts.items()]) + f" = {Bm:.6f} g/mol")
 
                     st.markdown("**3) Hitung Ar**")
@@ -154,7 +154,7 @@ if submitted:
                     else:
                         st.write(f"Ar = {Ar:.6f} g/mol (unsur tidak muncul di rumus)")
 
-                    st.markdown("**4) Hitung faktor (Ar/Bm)**")
+                    st.markdown("**4) Hitung faktor (Ar/BM)**")
                     st.write(f"{Ar:.6f} / {Bm:.6f} = {(Ar/Bm):.8f}")
 
                     st.markdown("**5) Hitung massa endapan**")
@@ -169,4 +169,4 @@ if submitted:
         st.error(f"Terjadi kesalahan: {e}")
 
 st.markdown("---")
-st.write("Versi ini mendukung rumus dengan tanda kurung sederhana seperti (NH4)2SO4.")
+st.write("Terimakasih dan jangan lupa bernafas.")
