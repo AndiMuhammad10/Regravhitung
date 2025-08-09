@@ -64,7 +64,7 @@ def molar_mass_from_formula(formula: str) -> float:
 
 
 # --- Antarmuka Streamlit ---
-st.title("Kalkulator Gravimetr")
+st.title("Kalkulator Gravimetri")
 st.write("Silahkan masukkan datanya mas bro ")
 
 with st.form(key='grav_form'):
