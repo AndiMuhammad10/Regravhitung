@@ -64,14 +64,14 @@ def molar_mass_from_formula(formula: str) -> float:
 
 
 # --- Antarmuka Streamlit ---
-st.title("Kalkulator Gravimetri — Perhitungan dengan Volume (mL)")
-st.write("Masukkan data berikut. Rumus yang digunakan:  %Kadar = ((Ar / Bm) * ((W1 - W0) / Volume (mL)) * 100)  ")
+st.title("Kalkulator Gravimetr")
+st.write("Silahkan masukkan datanya mas bro ")
 
 with st.form(key='grav_form'):
     st.subheader("Input data")
-    W0 = st.number_input("W0 (g) — berat filter/timbang sebelum (tare)", min_value=0.0, format="%.6f", value=0.000000)
-    W1 = st.number_input("W1 (g) — berat filter/timbang setelah endapan", min_value=0.0, format="%.6f", value=0.000000)
-    volume_ml = st.number_input("Volume sampel (mL)", min_value=0.0, format="%.6f", value=1.000000)
+    W0 = st.number_input("W0 (g) — berat filter/timbang sebelum (tare)", min_value=0.0, format="%.6f", value=0.0000)
+    W1 = st.number_input("W1 (g) — berat filter/timbang setelah endapan", min_value=0.0, format="%.6f", value=0.0000)
+    volume_ml = st.number_input("Volume sampel (mL)", min_value=0.0, format="%.6f", value=1.0000)
     compound = st.text_input("Senyawa endapan (rumus kimia, contoh: BaCrO4)", value="BaCrO4")
     target_element = st.text_input("Unsur yang dicari (simbol, contoh: Ba)", value="Ba")
 
@@ -108,26 +108,26 @@ if submitted:
                 percent_kadar = ( (Ar / Bm) * (deposit / volume_ml) ) * 100
 
                 # Tampilkan hasil ringkas
-                st.subheader("Hasil singkat")
-                st.write(f"Massa molar senyawa endapan (Bm) = {Bm:.6f} g/mol")
-                st.write(f"Massa " + (f"{target_element} (termasuk koefisien dalam rumus)" if target_count>0 else f"{target_element}") + f" (Ar) = {Ar:.6f} g/mol")
+                st.subheader("Perhitungan")
+                st.write(f"Berat Molekul (Bm) = {Bm:.6f} g/mol")
+                st.write(f"Massa " + (f"{target_element} (Atom Relatif)" if target_count>0 else f"{target_element}") + f" (Ar) = {Ar:.6f} g/mol")
                 st.write(f"Massa endapan (W1 - W0) = {deposit:.6f} g")
                 st.write(f"Volume sampel = {volume_ml:.6f} mL")
                 st.write(f"% Kadar ({target_element}) = {percent_kadar:.6f} %")
 
                 # Tampilkan langkah perhitungan detail
                 with st.expander("Lihat langkah perhitungan detail"):
-                    st.markdown("**1) Parsing rumus dan kontribusi tiap unsur**")
+                    st.markdown("**1) Jumlah setiap unsur**")
                     rows = []
                     for el, cnt in counts.items():
                         mass_el = periodic_table[el] * cnt
                         rows.append(f"{el}: count = {cnt} → {periodic_table[el]:.6f} × {cnt} = {mass_el:.6f} g/mol")
                         st.write(rows[-1])
 
-                    st.markdown("**2) Hitung massa molar senyawa endapan (Bm)**")
+                    st.markdown("**2) Hitung berat molekul senyawa endapan (Bm)**")
                     st.write(f"Bm({compound}) = " + " + ".join([f"{periodic_table[el]:.6f}×{cnt}" for el, cnt in counts.items()]) + f" = {Bm:.6f} g/mol")
 
-                    st.markdown("**3) Hitung Ar (massa unsur target)**")
+                    st.markdown("**3) Hitung Ar ( unsur target)**")
                     if target_count > 0:
                         st.write(f"Ar = massa atom {target_element} × koefisien dalam rumus = {periodic_table[target_element]:.6f} × {target_count} = {Ar:.6f} g/mol")
                     else:
@@ -139,11 +139,11 @@ if submitted:
                     st.markdown("**5) Hitung massa endapan**")
                     st.write(f"W1 - W0 = {W1:.6f} - {W0:.6f} = {deposit:.6f} g")
 
-                    st.markdown("**6) Substitusi ke rumus akhir**")
+                    st.markdown("**6) Masukkan ke rumus**")
                     st.write(f"% Kadar = ((Ar / Bm) × ((W1 - W0) / Volume(mL))) × 100")
                     st.write(f"% Kadar = ({Ar:.6f} / {Bm:.6f}) × ({deposit:.6f} / {volume_ml:.6f}) × 100 = {percent_kadar:.6f} %")
 
-                    st.caption("Catatan: Pastikan semua input memakai satuan g dan mL sesuai yang diminta. Jika Anda ingin hasil dalam mg/L atau unit lain, beri tahu aku supaya aku tambahkan opsi konversi.")
+                    st.caption("Catatan: Pastikan semua input memakai satuan g dan mL sesuai yang diminta dan jangan lupa terimakasih")
 
     except ValueError as e:
         st.error(str(e))
