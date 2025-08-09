@@ -14,7 +14,7 @@ page_bg = """
 }
 
 .stApp {
-    background: linear-gradient(-45deg, #d6b3ff, #ffffff, #4b0082, #f8f8f8);
+    background: linear-gradient(-45deg, #d6b3ff, #ffffff, #9370db, #f8f8f8);
     background-size: 400% 400%;
     animation: gradient 20s ease infinite;
 }
